@@ -37,9 +37,6 @@
 				--
 
 				-- --------------------------------------------------------", $file_contenue);
-			//	$alter;
-			//	preg_match_all("#<tablename>(.+)</tablename>[.+]<key>(.+)</key>#isU", $file_contenue, $alter);
-			//	print_r($alter);
 				$file_contenue = nl2br($file_contenue);
 				if(preg_match("#<table>(.+)</table>#isU", $file_contenue))
 				{
@@ -65,18 +62,13 @@
 					//========Key
 					$file_contenue = preg_replace("#<key>(.+)</key>#", "<br /><key>PRIMARY KEY `$1` (`$1`)</key>", $file_contenue);
 
-				//	$alter .= preg_replace("#CREATE TABLE `(.+)`;#","ALTER TABLE `$1` <br />", $file_contenue);
-				//	$alter .= preg_replace("#<key>(.+)</key>#", "  ADD PRIMARY KEY (`$1`);<br />", $file_contenue);
-
-
-					//$file_contenue = preg_replace("#<table>(.+)</table>#isU", "$1<br />) ENGINE=MyISAM DEFAULT CHARSET=latin1;", $file_contenue);
 					
 					$file_contenue = preg_replace("#</column>#", ",$0", $file_contenue);
 					$file_contenue = preg_replace("#[,</column>|</key>]
 </table>#", "<br />)<br /> ENGINE=MyISAM DEFAULT CHARSET=latin1;", $file_contenue);
 
 				}	
-			//	$file_contenue .= $alter;
+
 				echo $file_contenue;	
 			}
 			else
